@@ -1,0 +1,10 @@
+{
+    "name": "lasserafn/sample-project",
+    "authors": [
+        {
+            "name": "Lasse Rafn",
+            "email": "lasserafn@gmail.com"
+        }
+    ],
+    "require": {}
+}
