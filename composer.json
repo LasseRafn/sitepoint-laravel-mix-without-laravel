@@ -6,7 +6,9 @@
             "email": "lasserafn@gmail.com"
         }
     ],
-    "require": {
-        "illuminate/support": "^5.4"
+
+
+    "autoload": {
+        "files": ["mix.php"]
     }
 }

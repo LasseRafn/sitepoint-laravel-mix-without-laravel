@@ -5,7 +5,7 @@
      *
      * @param string $path
      * @param string $manifestDirectory
-     * @return \Illuminate\Support\HtmlString
+     * @return string
      *
      * @throws \Exception
      */
@@ -13,10 +13,10 @@
     {
         static $manifest;
         $publicFolder = '/public';
-		$rootPath = $_SERVER['DOCUMENT_ROOT'];
+	$rootPath = $_SERVER['DOCUMENT_ROOT'];
         $publicPath = $rootPath . $publicFolder;
 
-        if ($manifestDirectory && ! starts_with($manifestDirectory, '/')) {
+        if ($manifestDirectory && strpos($manifestDirectory, '/') !== 0) {
             $manifestDirectory = "/{$manifestDirectory}";
         }
         if (! $manifest) {
@@ -25,7 +25,7 @@
             }
             $manifest = json_decode(file_get_contents($manifestPath), true);
         }
-        if (! starts_with($path, '/')) {
+        if (strpos($path, '/') !== 0) {
             $path = "/{$path}";
         }
         $path = $publicFolder . $path;
@@ -36,7 +36,7 @@
             );
         }
         return file_exists($publicPath . ($manifestDirectory.'/hot'))
-                    ? new Illuminate\Support\HtmlString("http://localhost:8080{$manifest[$path]}")
-                    : new Illuminate\Support\HtmlString($manifestDirectory.$manifest[$path]);
+                    ? "http://localhost:8080{$manifest[$path]}"
+                    : $manifestDirectory.$manifest[$path];
     }
 }
